@@ -1,0 +1,583 @@
+Nonterminals useless in grammar
+
+   selection-stmt
+   iteration-stmt
+   expression
+   var
+   simple-expression
+   relop
+   additive-expression
+   addop
+   term
+   mulop
+   factor
+   call
+   args
+   arg-list
+
+
+Terminals unused in grammar
+
+   IF
+   ELSE
+   WHILE
+   PLUS
+   MINUS
+   MULTIPLY
+   DIVIDE
+   LESS_THAN
+   LESS_OR_EQUAL
+   GREATER_THAN
+   GREATER_OR_EQUAL
+   EQUALS
+   ASSIGNMENT
+   NOT_EQUALS
+   START_OF_COMMENT
+   END_OF_COMMENT
+
+
+Rules useless in grammar
+
+   27 statement: selection-stmt
+   28          | iteration-stmt
+
+   29 expression-stmt: expression EOL
+
+   30 selection-stmt: IF LEFT_BRACKET expression RIGHT_BRACKET statement
+   31               | IF LEFT_BRACKET expression RIGHT_BRACKET statement ELSE statement
+
+   32 iteration-stmt: WHILE LEFT_BRACKET expression RIGHT_BRACKET statement
+
+   33 return-stmt: RETURN expression EOL
+
+   34 expression: var ASSIGNMENT expression
+   35           | simple-expression
+
+   36 var: ID
+   37    | ID LEFT_SQR_BRACKET expression RIGHT_SQR_BRACKET
+
+   38 simple-expression: additive-expression relop additive-expression
+   39                  | additive-expression
+
+   40 relop: LESS_THAN
+   41      | LESS_OR_EQUAL
+   42      | GREATER_THAN
+   43      | GREATER_OR_EQUAL
+   44      | EQUALS
+   45      | NOT_EQUALS
+
+   46 additive-expression: additive-expression addop term
+
+   47 addop: PLUS
+   48      | MINUS
+
+   49 term: term mulop factor
+   50     | factor
+
+   51 mulop: MULTIPLY
+   52      | DIVIDE
+
+   53 factor: LEFT_BRACKET expression RIGHT_BRACKET
+   54       | var
+   55       | call
+
+   56 call: ID LEFT_BRACKET args RIGHT_BRACKET
+
+   57 args: arg-list
+   58     | %empty
+
+   59 arg-list: arg-list COMMA expression
+   60         | expression
+   61         | NUM
+
+   62 call: ID LEFT_BRACKET args RIGHT_BRACKET
+
+   63 args: arg-list
+   64     | %empty
+
+   65 arg-list: arg-list COMMA expression
+   66         | expression
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 program: declaration-list
+
+    2 declaration-list: declaration-list declaration
+    3                 | declaration
+
+    4 declaration: var-declaration
+    5            | fun-declaration
+
+    6 var-declaration: type-specifier ID EOL
+    7                | type-specifier ID LEFT_SQR_BRACKET NUM RIGHT_SQR_BRACKET
+
+    8 type-specifier: INT
+    9               | VOID
+
+   10 fun-declaration: type-specifier ID LEFT_BRACKET params RIGHT_BRACKET compound-stmt
+
+   11 params: param-list
+   12       | VOID
+
+   13 param-list: param-list COMMA param
+   14           | param
+
+   15 param: type-specifier ID
+   16      | type-specifier ID LEFT_SQR_BRACKET RIGHT_SQR_BRACKET
+
+   17 compound-stmt: LEFT_PARANTHESIS local-declarations statement-list RIGHT_PARANTHESIS
+
+   18 local-declarations: local-declarations var-declaration
+   19                   | %empty
+
+   20 statement-list: statement-list statement
+   21               | %empty
+
+   22 statement: expression-stmt
+   23          | compound-stmt
+   24          | return-stmt
+
+   25 expression-stmt: EOL
+
+   26 return-stmt: RETURN EOL
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+IF (258)
+ELSE (259)
+INT (260) 8
+RETURN (261) 26
+VOID (262) 9 12
+WHILE (263)
+PLUS (264)
+MINUS (265)
+MULTIPLY (266)
+DIVIDE (267)
+LESS_THAN (268)
+LESS_OR_EQUAL (269)
+GREATER_THAN (270)
+GREATER_OR_EQUAL (271)
+EQUALS (272)
+ASSIGNMENT (273)
+NOT_EQUALS (274)
+EOL (275) 6 25 26
+COMMA (276) 13
+LEFT_PARANTHESIS (277) 17
+RIGHT_PARANTHESIS (278) 17
+LEFT_BRACKET (279) 10
+RIGHT_BRACKET (280) 10
+LEFT_SQR_BRACKET (281) 7 16
+RIGHT_SQR_BRACKET (282) 7 16
+START_OF_COMMENT (283)
+END_OF_COMMENT (284)
+ID (285) 6 7 10 15 16
+NUM (286) 7
+
+
+Nonterminals, with rules where they appear
+
+$accept (32)
+    on left: 0
+program (33)
+    on left: 1, on right: 0
+declaration-list (34)
+    on left: 2 3, on right: 1 2
+declaration (35)
+    on left: 4 5, on right: 2 3
+var-declaration (36)
+    on left: 6 7, on right: 4 18
+type-specifier (37)
+    on left: 8 9, on right: 6 7 10 15 16
+fun-declaration (38)
+    on left: 10, on right: 5
+params (39)
+    on left: 11 12, on right: 10
+param-list (40)
+    on left: 13 14, on right: 11 13
+param (41)
+    on left: 15 16, on right: 13 14
+compound-stmt (42)
+    on left: 17, on right: 10 23
+local-declarations (43)
+    on left: 18 19, on right: 17 18
+statement-list (44)
+    on left: 20 21, on right: 17 20
+statement (45)
+    on left: 22 23 24, on right: 20
+expression-stmt (46)
+    on left: 25, on right: 22
+return-stmt (47)
+    on left: 26, on right: 24
+
+
+State 0
+
+    0 $accept: . program $end
+
+    INT   shift, and go to state 1
+    VOID  shift, and go to state 2
+
+    program           go to state 3
+    declaration-list  go to state 4
+    declaration       go to state 5
+    var-declaration   go to state 6
+    type-specifier    go to state 7
+    fun-declaration   go to state 8
+
+
+State 1
+
+    8 type-specifier: INT .
+
+    $default  reduce using rule 8 (type-specifier)
+
+
+State 2
+
+    9 type-specifier: VOID .
+
+    $default  reduce using rule 9 (type-specifier)
+
+
+State 3
+
+    0 $accept: program . $end
+
+    $end  shift, and go to state 9
+
+
+State 4
+
+    1 program: declaration-list .
+    2 declaration-list: declaration-list . declaration
+
+    INT   shift, and go to state 1
+    VOID  shift, and go to state 2
+
+    $default  reduce using rule 1 (program)
+
+    declaration      go to state 10
+    var-declaration  go to state 6
+    type-specifier   go to state 7
+    fun-declaration  go to state 8
+
+
+State 5
+
+    3 declaration-list: declaration .
+
+    $default  reduce using rule 3 (declaration-list)
+
+
+State 6
+
+    4 declaration: var-declaration .
+
+    $default  reduce using rule 4 (declaration)
+
+
+State 7
+
+    6 var-declaration: type-specifier . ID EOL
+    7                | type-specifier . ID LEFT_SQR_BRACKET NUM RIGHT_SQR_BRACKET
+   10 fun-declaration: type-specifier . ID LEFT_BRACKET params RIGHT_BRACKET compound-stmt
+
+    ID  shift, and go to state 11
+
+
+State 8
+
+    5 declaration: fun-declaration .
+
+    $default  reduce using rule 5 (declaration)
+
+
+State 9
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+State 10
+
+    2 declaration-list: declaration-list declaration .
+
+    $default  reduce using rule 2 (declaration-list)
+
+
+State 11
+
+    6 var-declaration: type-specifier ID . EOL
+    7                | type-specifier ID . LEFT_SQR_BRACKET NUM RIGHT_SQR_BRACKET
+   10 fun-declaration: type-specifier ID . LEFT_BRACKET params RIGHT_BRACKET compound-stmt
+
+    EOL               shift, and go to state 12
+    LEFT_BRACKET      shift, and go to state 13
+    LEFT_SQR_BRACKET  shift, and go to state 14
+
+
+State 12
+
+    6 var-declaration: type-specifier ID EOL .
+
+    $default  reduce using rule 6 (var-declaration)
+
+
+State 13
+
+   10 fun-declaration: type-specifier ID LEFT_BRACKET . params RIGHT_BRACKET compound-stmt
+
+    INT   shift, and go to state 1
+    VOID  shift, and go to state 15
+
+    type-specifier  go to state 16
+    params          go to state 17
+    param-list      go to state 18
+    param           go to state 19
+
+
+State 14
+
+    7 var-declaration: type-specifier ID LEFT_SQR_BRACKET . NUM RIGHT_SQR_BRACKET
+
+    NUM  shift, and go to state 20
+
+
+State 15
+
+    9 type-specifier: VOID .
+   12 params: VOID .
+
+    RIGHT_BRACKET  reduce using rule 12 (params)
+    $default       reduce using rule 9 (type-specifier)
+
+
+State 16
+
+   15 param: type-specifier . ID
+   16      | type-specifier . ID LEFT_SQR_BRACKET RIGHT_SQR_BRACKET
+
+    ID  shift, and go to state 21
+
+
+State 17
+
+   10 fun-declaration: type-specifier ID LEFT_BRACKET params . RIGHT_BRACKET compound-stmt
+
+    RIGHT_BRACKET  shift, and go to state 22
+
+
+State 18
+
+   11 params: param-list .
+   13 param-list: param-list . COMMA param
+
+    COMMA  shift, and go to state 23
+
+    $default  reduce using rule 11 (params)
+
+
+State 19
+
+   14 param-list: param .
+
+    $default  reduce using rule 14 (param-list)
+
+
+State 20
+
+    7 var-declaration: type-specifier ID LEFT_SQR_BRACKET NUM . RIGHT_SQR_BRACKET
+
+    RIGHT_SQR_BRACKET  shift, and go to state 24
+
+
+State 21
+
+   15 param: type-specifier ID .
+   16      | type-specifier ID . LEFT_SQR_BRACKET RIGHT_SQR_BRACKET
+
+    LEFT_SQR_BRACKET  shift, and go to state 25
+
+    $default  reduce using rule 15 (param)
+
+
+State 22
+
+   10 fun-declaration: type-specifier ID LEFT_BRACKET params RIGHT_BRACKET . compound-stmt
+
+    LEFT_PARANTHESIS  shift, and go to state 26
+
+    compound-stmt  go to state 27
+
+
+State 23
+
+   13 param-list: param-list COMMA . param
+
+    INT   shift, and go to state 1
+    VOID  shift, and go to state 2
+
+    type-specifier  go to state 16
+    param           go to state 28
+
+
+State 24
+
+    7 var-declaration: type-specifier ID LEFT_SQR_BRACKET NUM RIGHT_SQR_BRACKET .
+
+    $default  reduce using rule 7 (var-declaration)
+
+
+State 25
+
+   16 param: type-specifier ID LEFT_SQR_BRACKET . RIGHT_SQR_BRACKET
+
+    RIGHT_SQR_BRACKET  shift, and go to state 29
+
+
+State 26
+
+   17 compound-stmt: LEFT_PARANTHESIS . local-declarations statement-list RIGHT_PARANTHESIS
+
+    $default  reduce using rule 19 (local-declarations)
+
+    local-declarations  go to state 30
+
+
+State 27
+
+   10 fun-declaration: type-specifier ID LEFT_BRACKET params RIGHT_BRACKET compound-stmt .
+
+    $default  reduce using rule 10 (fun-declaration)
+
+
+State 28
+
+   13 param-list: param-list COMMA param .
+
+    $default  reduce using rule 13 (param-list)
+
+
+State 29
+
+   16 param: type-specifier ID LEFT_SQR_BRACKET RIGHT_SQR_BRACKET .
+
+    $default  reduce using rule 16 (param)
+
+
+State 30
+
+   17 compound-stmt: LEFT_PARANTHESIS local-declarations . statement-list RIGHT_PARANTHESIS
+   18 local-declarations: local-declarations . var-declaration
+
+    INT   shift, and go to state 1
+    VOID  shift, and go to state 2
+
+    $default  reduce using rule 21 (statement-list)
+
+    var-declaration  go to state 31
+    type-specifier   go to state 32
+    statement-list   go to state 33
+
+
+State 31
+
+   18 local-declarations: local-declarations var-declaration .
+
+    $default  reduce using rule 18 (local-declarations)
+
+
+State 32
+
+    6 var-declaration: type-specifier . ID EOL
+    7                | type-specifier . ID LEFT_SQR_BRACKET NUM RIGHT_SQR_BRACKET
+
+    ID  shift, and go to state 34
+
+
+State 33
+
+   17 compound-stmt: LEFT_PARANTHESIS local-declarations statement-list . RIGHT_PARANTHESIS
+   20 statement-list: statement-list . statement
+
+    RETURN             shift, and go to state 35
+    EOL                shift, and go to state 36
+    LEFT_PARANTHESIS   shift, and go to state 26
+    RIGHT_PARANTHESIS  shift, and go to state 37
+
+    compound-stmt    go to state 38
+    statement        go to state 39
+    expression-stmt  go to state 40
+    return-stmt      go to state 41
+
+
+State 34
+
+    6 var-declaration: type-specifier ID . EOL
+    7                | type-specifier ID . LEFT_SQR_BRACKET NUM RIGHT_SQR_BRACKET
+
+    EOL               shift, and go to state 12
+    LEFT_SQR_BRACKET  shift, and go to state 14
+
+
+State 35
+
+   26 return-stmt: RETURN . EOL
+
+    EOL  shift, and go to state 42
+
+
+State 36
+
+   25 expression-stmt: EOL .
+
+    $default  reduce using rule 25 (expression-stmt)
+
+
+State 37
+
+   17 compound-stmt: LEFT_PARANTHESIS local-declarations statement-list RIGHT_PARANTHESIS .
+
+    $default  reduce using rule 17 (compound-stmt)
+
+
+State 38
+
+   23 statement: compound-stmt .
+
+    $default  reduce using rule 23 (statement)
+
+
+State 39
+
+   20 statement-list: statement-list statement .
+
+    $default  reduce using rule 20 (statement-list)
+
+
+State 40
+
+   22 statement: expression-stmt .
+
+    $default  reduce using rule 22 (statement)
+
+
+State 41
+
+   24 statement: return-stmt .
+
+    $default  reduce using rule 24 (statement)
+
+
+State 42
+
+   26 return-stmt: RETURN EOL .
+
+    $default  reduce using rule 26 (return-stmt)
