@@ -18,4 +18,4 @@ A simple Lexical Analyzer and a Syntax Analyzer for the language `C-` defined as
 
 * Linux - Use `./compiler`
 
-### When a need of compilation, run the makefile using `make -f MAKEFILE` (Linux).
+### In a need of compilation, run the makefile using `make -f MAKEFILE` (Linux).
