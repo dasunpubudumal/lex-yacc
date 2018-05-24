@@ -4,10 +4,10 @@
 
 A simple Lexical Analyzer and a Syntax Analyzer for the language `C-` defined as below.
 
-![Pic One]("docs/1.png")
+![Pic One](docs/1.png)
 (Figure 1)
 
-![Pic Two]("docs/2.png")
+![Pic Two](docs/2.png)
 (Figure 2)
 
 * `lexer.l` is the Lexical Analyzer.
