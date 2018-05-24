@@ -49,7 +49,7 @@ var-declaration: type-specifier ID EOL | type-specifier ID LEFT_SQR_BRACKET NUM 
 type-specifier: INT | VOID;
 fun-declaration: type-specifier ID LEFT_BRACKET params RIGHT_BRACKET compound-stmt;
 params: param-list | VOID;
-param-list: param-list COMMA param| param;
+param-list: param-list COMMA param | param;
 param: type-specifier ID | type-specifier ID LEFT_SQR_BRACKET RIGHT_SQR_BRACKET;
 compound-stmt: LEFT_PARANTHESIS local-declarations statement-list RIGHT_PARANTHESIS;
 local-declarations: local-declarations var-declaration | %empty;
@@ -65,17 +65,14 @@ expression: var ASSIGNMENT expression | simple-expression;
 var: ID | ID LEFT_SQR_BRACKET expression RIGHT_SQR_BRACKET;
 simple-expression: additive-expression relop additive-expression | additive-expression;
 relop: LESS_THAN | LESS_OR_EQUAL | GREATER_THAN | GREATER_OR_EQUAL | EQUALS | NOT_EQUALS;
-additive-expression: additive-expression addop term;
+additive-expression: additive-expression addop term | term;
 addop: PLUS | MINUS;
 term: term mulop factor | factor;
 mulop: MULTIPLY | DIVIDE;
-factor: LEFT_BRACKET expression RIGHT_BRACKET | var | call;
+factor: LEFT_BRACKET expression RIGHT_BRACKET | var | call | NUM;
 call: ID LEFT_BRACKET args RIGHT_BRACKET;
 args: arg-list | %empty;
-arg-list: arg-list COMMA expression | expression | NUM ;
-call: ID LEFT_BRACKET args RIGHT_BRACKET;
-args: arg-list | %empty;
-arg-list: arg-list COMMA expression | expression
+arg-list: arg-list COMMA expression | expression;
 
 %%                                                                              
 int main () {     

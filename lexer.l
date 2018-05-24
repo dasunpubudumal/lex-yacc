@@ -39,7 +39,8 @@
 "*/"                        return END_OF_COMMENT;
 [a-zA-Z][a-zA-Z]*           return ID;
 [0-9][0-9]*                 return NUM;
-[ \t\n]+                    ;
+[ \t\r]+                    ;
+[\n]                        ;
 .                           yyerror("Error in Syntax!");
 
 
