@@ -483,8 +483,8 @@ char *yytext;
 #line 2 "lexer.l"
     #include "parser.tab.h"
 
-    void yyerror (char const *s) {
-        fprintf (stderr, "%s\n", s);
+    void yyerror(char const *s) {
+      fprintf(stderr, "line %d: %s\n", yylineno, s);
     }
     // extern int line_number
 #line 491 "lex.yy.c"
