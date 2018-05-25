@@ -70,10 +70,8 @@ extern int yydebug;
     RIGHT_BRACKET = 280,
     LEFT_SQR_BRACKET = 281,
     RIGHT_SQR_BRACKET = 282,
-    START_OF_COMMENT = 283,
-    END_OF_COMMENT = 284,
-    ID = 285,
-    NUM = 286
+    ID = 283,
+    NUM = 284
   };
 #endif
 

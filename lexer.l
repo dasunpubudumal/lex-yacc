@@ -35,8 +35,7 @@
 ")"                         return RIGHT_BRACKET;
 "["                         return LEFT_SQR_BRACKET;
 "]"                         return RIGHT_SQR_BRACKET;
-"/*"                        return START_OF_COMMENT;
-"*/"                        return END_OF_COMMENT;
+"/*"(.|\n)*"*/"             ;
 [a-zA-Z][a-zA-Z]*           return ID;
 [0-9][0-9]*                 return NUM;
 [ \t\r]+                    ;

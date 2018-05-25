@@ -1,9 +1,3 @@
-Terminals unused in grammar
-
-   START_OF_COMMENT
-   END_OF_COMMENT
-
-
 State 96 conflicts: 1 shift/reduce
 
 
@@ -132,73 +126,71 @@ LEFT_BRACKET (279) 10 29 30 31 54 58
 RIGHT_BRACKET (280) 10 29 30 31 54 58
 LEFT_SQR_BRACKET (281) 7 16 37
 RIGHT_SQR_BRACKET (282) 7 16 37
-START_OF_COMMENT (283)
-END_OF_COMMENT (284)
-ID (285) 6 7 10 15 16 36 37 58
-NUM (286) 7 57
+ID (283) 6 7 10 15 16 36 37 58
+NUM (284) 7 57
 
 
 Nonterminals, with rules where they appear
 
-$accept (32)
+$accept (30)
     on left: 0
-program (33)
+program (31)
     on left: 1, on right: 0
-declaration-list (34)
+declaration-list (32)
     on left: 2 3, on right: 1 2
-declaration (35)
+declaration (33)
     on left: 4 5, on right: 2 3
-var-declaration (36)
+var-declaration (34)
     on left: 6 7, on right: 4 18
-type-specifier (37)
+type-specifier (35)
     on left: 8 9, on right: 6 7 10 15 16
-fun-declaration (38)
+fun-declaration (36)
     on left: 10, on right: 5
-params (39)
+params (37)
     on left: 11 12, on right: 10
-param-list (40)
+param-list (38)
     on left: 13 14, on right: 11 13
-param (41)
+param (39)
     on left: 15 16, on right: 13 14
-compound-stmt (42)
+compound-stmt (40)
     on left: 17, on right: 10 23
-local-declarations (43)
+local-declarations (41)
     on left: 18 19, on right: 17 18
-statement-list (44)
+statement-list (42)
     on left: 20 21, on right: 17 20
-statement (45)
+statement (43)
     on left: 22 23 24 25 26, on right: 20 29 30 31
-expression-stmt (46)
+expression-stmt (44)
     on left: 27 28, on right: 22
-selection-stmt (47)
+selection-stmt (45)
     on left: 29 30, on right: 24
-iteration-stmt (48)
+iteration-stmt (46)
     on left: 31, on right: 25
-return-stmt (49)
+return-stmt (47)
     on left: 32 33, on right: 26
-expression (50)
+expression (48)
     on left: 34 35, on right: 27 29 30 31 33 34 37 54 61 62
-var (51)
+var (49)
     on left: 36 37, on right: 34 55
-simple-expression (52)
+simple-expression (50)
     on left: 38 39, on right: 35
-relop (53)
+relop (51)
     on left: 40 41 42 43 44 45, on right: 38
-additive-expression (54)
+additive-expression (52)
     on left: 46 47, on right: 38 39 46
-addop (55)
+addop (53)
     on left: 48 49, on right: 46
-term (56)
+term (54)
     on left: 50 51, on right: 46 47 50
-mulop (57)
+mulop (55)
     on left: 52 53, on right: 50
-factor (58)
+factor (56)
     on left: 54 55 56 57, on right: 50 51
-call (59)
+call (57)
     on left: 58, on right: 56
-args (60)
+args (58)
     on left: 59 60, on right: 58
-arg-list (61)
+arg-list (59)
     on left: 61 62, on right: 59 61
 
 

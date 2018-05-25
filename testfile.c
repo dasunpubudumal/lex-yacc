@@ -1,5 +1,6 @@
 int gcd (int u, int v){
     if (v==0) return u ;
+    /* Hello! from Comment */
     else return gcd(v, u-u/v*v);
 }
 

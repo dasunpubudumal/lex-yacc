@@ -35,8 +35,6 @@
 %token RIGHT_BRACKET
 %token LEFT_SQR_BRACKET
 %token RIGHT_SQR_BRACKET
-%token START_OF_COMMENT
-%token END_OF_COMMENT
 %token ID
 %token NUM
 
