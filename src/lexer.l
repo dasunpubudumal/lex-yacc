@@ -3,9 +3,8 @@
 %{
     #include "parser.tab.h"
 
-    int yyerror(char const *s) {
+    void yyerror(char const *s) {
       fprintf(stderr, "line %d: %s\n", yylineno, s);
-      return 0;
     }
 
     extern int line_number;  
