@@ -1,15 +1,24 @@
+%x COMMENT_MULTI_LINE INSIDE
+
 %{
     #include "parser.tab.h"
 
     void yyerror(char const *s) {
       fprintf(stderr, "line %d: %s\n", yylineno, s);
     }
+    extern char* yytext;
     // extern int line_number
 %}
 %option noyywrap    
 
 %%
 
+<INITIAL>"/*".              {BEGIN(INSIDE);}
+<COMMENT_MULTI_LINE>"*/"    {BEGIN(INITIAL);}
+<INTIAL><<EOF>>             {
+                              yyerror("UNTERMINATED COMMENT!");
+                              yyterminate();
+                            }
 "if"                        return IF;
 "else"                      return ELSE;
 "int"                       return INT;
@@ -35,7 +44,6 @@
 ")"                         return RIGHT_BRACKET;
 "["                         return LEFT_SQR_BRACKET;
 "]"                         return RIGHT_SQR_BRACKET;
-"/*"(.|\n)*"*/"             ;
 [a-zA-Z][a-zA-Z]*           return ID;
 [0-9][0-9]*                 return NUM;
 [ \t\r]+                    ;

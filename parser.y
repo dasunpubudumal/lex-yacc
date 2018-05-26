@@ -12,6 +12,8 @@
 %}
 
 // Tokens Definition
+%token START_OF_COMMENT
+%token END_OF_COMMENT
 %token IF
 %token ELSE
 %token INT
@@ -75,6 +77,6 @@ args: arg-list | %empty;
 arg-list: arg-list COMMA expression | expression;
 
 %%                                                                              
-int main () {     
+int main (void) {     
   yyparse ();
 }

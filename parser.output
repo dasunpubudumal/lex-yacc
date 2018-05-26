@@ -1,3 +1,9 @@
+Terminals unused in grammar
+
+   START_OF_COMMENT
+   END_OF_COMMENT
+
+
 State 97 conflicts: 1 shift/reduce
 
 
@@ -101,96 +107,98 @@ Terminals, with rules where they appear
 
 $end (0) 0
 error (256)
-IF (258) 29 30
-ELSE (259) 30
-INT (260) 8
-RETURN (261) 32 33
-VOID (262) 9 12
-WHILE (263) 31
-PLUS (264) 48
-MINUS (265) 49
-MULTIPLY (266) 52
-DIVIDE (267) 53
-LESS_THAN (268) 40
-LESS_OR_EQUAL (269) 41
-GREATER_THAN (270) 42
-GREATER_OR_EQUAL (271) 43
-EQUALS (272) 44
-ASSIGNMENT (273) 34
-NOT_EQUALS (274) 45
-EOL (275) 6 7 27 28 32 33
-COMMA (276) 13 61
-LEFT_PARANTHESIS (277) 17
-RIGHT_PARANTHESIS (278) 17
-LEFT_BRACKET (279) 10 29 30 31 54 58
-RIGHT_BRACKET (280) 10 29 30 31 54 58
-LEFT_SQR_BRACKET (281) 7 16 37
-RIGHT_SQR_BRACKET (282) 7 16 37
-ID (283) 6 7 10 15 16 36 37 58
-NUM (284) 7 57
+START_OF_COMMENT (258)
+END_OF_COMMENT (259)
+IF (260) 29 30
+ELSE (261) 30
+INT (262) 8
+RETURN (263) 32 33
+VOID (264) 9 12
+WHILE (265) 31
+PLUS (266) 48
+MINUS (267) 49
+MULTIPLY (268) 52
+DIVIDE (269) 53
+LESS_THAN (270) 40
+LESS_OR_EQUAL (271) 41
+GREATER_THAN (272) 42
+GREATER_OR_EQUAL (273) 43
+EQUALS (274) 44
+ASSIGNMENT (275) 34
+NOT_EQUALS (276) 45
+EOL (277) 6 7 27 28 32 33
+COMMA (278) 13 61
+LEFT_PARANTHESIS (279) 17
+RIGHT_PARANTHESIS (280) 17
+LEFT_BRACKET (281) 10 29 30 31 54 58
+RIGHT_BRACKET (282) 10 29 30 31 54 58
+LEFT_SQR_BRACKET (283) 7 16 37
+RIGHT_SQR_BRACKET (284) 7 16 37
+ID (285) 6 7 10 15 16 36 37 58
+NUM (286) 7 57
 
 
 Nonterminals, with rules where they appear
 
-$accept (30)
+$accept (32)
     on left: 0
-program (31)
+program (33)
     on left: 1, on right: 0
-declaration-list (32)
+declaration-list (34)
     on left: 2 3, on right: 1 2
-declaration (33)
+declaration (35)
     on left: 4 5, on right: 2 3
-var-declaration (34)
+var-declaration (36)
     on left: 6 7, on right: 4 18
-type-specifier (35)
+type-specifier (37)
     on left: 8 9, on right: 6 7 10 15 16
-fun-declaration (36)
+fun-declaration (38)
     on left: 10, on right: 5
-params (37)
+params (39)
     on left: 11 12, on right: 10
-param-list (38)
+param-list (40)
     on left: 13 14, on right: 11 13
-param (39)
+param (41)
     on left: 15 16, on right: 13 14
-compound-stmt (40)
+compound-stmt (42)
     on left: 17, on right: 10 23
-local-declarations (41)
+local-declarations (43)
     on left: 18 19, on right: 17 18
-statement-list (42)
+statement-list (44)
     on left: 20 21, on right: 17 20
-statement (43)
+statement (45)
     on left: 22 23 24 25 26, on right: 20 29 30 31
-expression-stmt (44)
+expression-stmt (46)
     on left: 27 28, on right: 22
-selection-stmt (45)
+selection-stmt (47)
     on left: 29 30, on right: 24
-iteration-stmt (46)
+iteration-stmt (48)
     on left: 31, on right: 25
-return-stmt (47)
+return-stmt (49)
     on left: 32 33, on right: 26
-expression (48)
+expression (50)
     on left: 34 35, on right: 27 29 30 31 33 34 37 54 61 62
-var (49)
+var (51)
     on left: 36 37, on right: 34 55
-simple-expression (50)
+simple-expression (52)
     on left: 38 39, on right: 35
-relop (51)
+relop (53)
     on left: 40 41 42 43 44 45, on right: 38
-additive-expression (52)
+additive-expression (54)
     on left: 46 47, on right: 38 39 46
-addop (53)
+addop (55)
     on left: 48 49, on right: 46
-term (54)
+term (56)
     on left: 50 51, on right: 46 47 50
-mulop (55)
+mulop (57)
     on left: 52 53, on right: 50
-factor (56)
+factor (58)
     on left: 54 55 56 57, on right: 50 51
-call (57)
+call (59)
     on left: 58, on right: 56
-args (58)
+args (60)
     on left: 59 60, on right: 58
-arg-list (59)
+arg-list (61)
     on left: 61 62, on right: 59 61
 
 
