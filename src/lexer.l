@@ -7,13 +7,12 @@
       fprintf(stderr, "line %d: %s\n", yylineno, s);
     }
     extern char* yytext;
-    // extern int line_number
 %}
 %option noyywrap    
 
 %%
 
-<INITIAL>"/*".              {BEGIN(INSIDE);}
+<INITIAL>"/*".              {BEGIN(COMMENT_MULTI_LINE);}
 <COMMENT_MULTI_LINE>"*/"    {BEGIN(INITIAL);}
 <INTIAL><<EOF>>             {
                               yyerror("UNTERMINATED COMMENT!");

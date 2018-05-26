@@ -1,7 +1,7 @@
 int x[10];
 int minloc ( int a[], int low, int high ){
 int i; int x; int k;
-
+/* hello */
 k = low;
 x = a[low];
 i = low + 1;
