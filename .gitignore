@@ -1,8 +1,0 @@
-docs/todo.txt
-docs/lex.yy.c
-docs/parser.output
-docs/parser.tab.c
-docs/parser.tab.h
-docs/parser.y
-docs/lex.yy.o
-docs/parser.tab.o
