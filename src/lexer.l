@@ -3,8 +3,9 @@
 %{
     #include "parser.tab.h"
 
-    void yyerror(char const *s) {
+    int yyerror(char const *s) {
       fprintf(stderr, "line %d: %s\n", yylineno, s);
+      return 0;
     }
 
     extern int line_number;  
@@ -19,7 +20,7 @@
 <COMMENT_MULTI>.            ;
 <COMMENT_MULTI>\n           ;
 <COMMENT_MULTI><<EOF>>      {
-                              printf("UNTERMINATED COMMENT AT line %d!", line_number);
+                              printf("UNTERMINATED COMMENT AT line %d!\n", line_number);
                               yyterminate();
                             }
 "if"                        return IF;
@@ -32,10 +33,10 @@
 "-"                         return MINUS;
 "*"                         return MULTIPLY;
 "/"                         return DIVIDE;
-"<"                         return LESS_THAN;
-"<="                        return LESS_OR_EQUAL;                     
-">"                         return GREATER_THAN;
+"<="                        return LESS_OR_EQUAL;
+"<"                         return LESS_THAN;                     
 ">="                        return GREATER_OR_EQUAL;
+">"                         return GREATER_THAN;
 "=="                        return EQUALS;
 "!="                        return NOT_EQUALS;
 "="                         return ASSIGNMENT;
@@ -51,6 +52,7 @@
 [0-9][0-9]*                 return NUM;
 [ \t\r]+                    ;
 [\n]                        {line_number++;}
+[a-zA-Z0-9]+                yyerror("Identifier must consist only alphabetical characters!");
 .                           yyerror("Error in Syntax!");
 
 
