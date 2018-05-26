@@ -1,4 +1,4 @@
-%x COMMENT_MULTI_LINE INSIDE
+%x COMMENT_MULTI 
 
 %{
     #include "parser.tab.h"
@@ -6,16 +6,20 @@
     void yyerror(char const *s) {
       fprintf(stderr, "line %d: %s\n", yylineno, s);
     }
+
+    extern int line_number;  
     extern char* yytext;
 %}
 %option noyywrap    
 
 %%
 
-<INITIAL>"/*".              {BEGIN(COMMENT_MULTI_LINE);}
-<COMMENT_MULTI_LINE>"*/"    {BEGIN(INITIAL);}
-<INTIAL><<EOF>>             {
-                              yyerror("UNTERMINATED COMMENT!");
+<INITIAL>"/*"               {BEGIN(COMMENT_MULTI);}
+<COMMENT_MULTI>"*/"         {BEGIN(INITIAL);}
+<COMMENT_MULTI>.            ;
+<COMMENT_MULTI>\n           ;
+<COMMENT_MULTI><<EOF>>      {
+                              printf("UNTERMINATED COMMENT AT line %d!", line_number);
                               yyterminate();
                             }
 "if"                        return IF;
@@ -46,7 +50,7 @@
 [a-zA-Z][a-zA-Z]*           return ID;
 [0-9][0-9]*                 return NUM;
 [ \t\r]+                    ;
-[\n]                        ;
+[\n]                        {line_number++;}
 .                           yyerror("Error in Syntax!");
 
 
