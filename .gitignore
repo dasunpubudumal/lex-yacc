@@ -1,8 +1,0 @@
-todo.txt
-lex.yy.c
-parser.output
-parser.tab.c
-parser.tab.h
-parser.y
-lex.yy.o
-parser.tab.o
