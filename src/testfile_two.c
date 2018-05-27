@@ -2,7 +2,7 @@ int x[10];
 int minloc ( int a[], int low, int high ){
 int i; int x; int k;
 
-/* Hello! */
+/*Hello!*/
 
 k = low;
 x = a[low];

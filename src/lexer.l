@@ -1,24 +1,29 @@
-%x COMMENT_MULTI 
+%x IN_COMMENT 
 
 %{
     #include "parser.tab.h"
+    extern int line_number;
 
     void yyerror(char const *s) {
-      fprintf(stderr, "line %d: %s\n", yylineno, s);
+      fprintf(stderr, "line %d: %s\n", line_number, s);
     }
-
-    extern int line_number;  
+ 
     extern char* yytext;
 %}
 %option noyywrap    
 
 %%
 
-<INITIAL>"/*"               {BEGIN(COMMENT_MULTI);}
-<COMMENT_MULTI>"*/"         {BEGIN(INITIAL);}
-<COMMENT_MULTI>.            ;
-<COMMENT_MULTI>\n           ;
-<COMMENT_MULTI><<EOF>>      {
+<INITIAL>{
+"/*"              BEGIN(IN_COMMENT);
+}
+<IN_COMMENT>{
+"*/"      BEGIN(INITIAL);
+[^*\n]+   // eat comment in chunks
+"*"       // eat the lone star
+\n        line_number++;
+}
+<IN_COMMENT><<EOF>>         {
                               printf("UNTERMINATED COMMENT AT line %d!", line_number);
                               yyterminate();
                             }

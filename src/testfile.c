@@ -1,1 +1,3 @@
-/* asdasdasd
+int main(void){
+    /* hello
+}
