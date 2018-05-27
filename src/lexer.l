@@ -13,19 +13,15 @@
 %option noyywrap    
 
 %%
-<INITIAL>{
-"/*"              BEGIN(IN_COMMENT);
-}
-<IN_COMMENT>{
-"*/"      BEGIN(INITIAL);
-[^*\n]+   // eat comment in chunks
-"*"       // eat the lone star
-\n        line_number++;
-}
-<IN_COMMENT><<EOF>>         {
-                              printf("UNTERMINATED COMMENT AT line %d!", line_number);
-                              yyterminate();
-                            }
+<INITIAL>"/*"         {BEGIN(IN_COMMENT);}
+<IN_COMMENT>"*/"      {BEGIN(INITIAL);}
+<IN_COMMENT>[^*\n]+   ;
+<IN_COMMENT>"*"       ;
+<IN_COMMENT>\n        {line_number++;}
+<IN_COMMENT><<EOF>>   {
+                        printf("UNTERMINATED COMMENT AT line %d!", line_number);
+                        yyterminate();
+                      }
 "if"                        return IF;
 "else"                      return ELSE;
 "int"                       return INT;
