@@ -13,6 +13,7 @@
 %option noyywrap    
 
 %%
+
 <INITIAL>"/*"         {BEGIN(IN_COMMENT);}
 <IN_COMMENT>"*/"      {BEGIN(INITIAL);}
 <IN_COMMENT>[^*\n]+   ;
@@ -22,6 +23,7 @@
                         printf("UNTERMINATED COMMENT AT line %d!", line_number);
                         yyterminate();
                       }
+
 "if"                        return IF;
 "else"                      return ELSE;
 "int"                       return INT;
@@ -52,6 +54,7 @@
 [ \t\r]+                    ;
 [\n]                        {line_number++;}
 [a-zA-Z0-9]+                yyerror("Identifier must consist only alphabetical characters!");
+[*][/]                      yyerror("not initialized comment!");
 .                           yyerror("Error in Syntax!");
 
 
