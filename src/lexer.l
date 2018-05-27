@@ -13,7 +13,6 @@
 %option noyywrap    
 
 %%
-
 <INITIAL>{
 "/*"              BEGIN(IN_COMMENT);
 }
@@ -37,10 +36,10 @@
 "-"                         return MINUS;
 "*"                         return MULTIPLY;
 "/"                         return DIVIDE;
-"<"                         return LESS_THAN;
-"<="                        return LESS_OR_EQUAL;                     
-">"                         return GREATER_THAN;
+"<="                        return LESS_OR_EQUAL;
+"<"                         return LESS_THAN;                     
 ">="                        return GREATER_OR_EQUAL;
+">"                         return GREATER_THAN;
 "=="                        return EQUALS;
 "!="                        return NOT_EQUALS;
 "="                         return ASSIGNMENT;
@@ -56,6 +55,7 @@
 [0-9][0-9]*                 return NUM;
 [ \t\r]+                    ;
 [\n]                        {line_number++;}
+[a-zA-Z0-9]+                yyerror("Identifier must consist only alphabetical characters!");
 .                           yyerror("Error in Syntax!");
 
 

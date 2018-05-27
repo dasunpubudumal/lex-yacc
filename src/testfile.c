@@ -1,3 +1,1 @@
-int main(void){
-    /* hello
-}
+/*HELLO*/
